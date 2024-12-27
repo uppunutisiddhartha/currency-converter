@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Codes</title>     
+</head>
+<style>
+    *{
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background-color:rgb(215, 238, 233);
+        overflow:hidden;
+    }
+    nav{
+        padding: 20px;
+        background-color: #68afaf;
+        color: white;
+        text-align: center;
+        border-radius: 10px;
+        margin-top: 20px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    nav H2{
+        background-color:  #68afaf;
+        font-family: 'Courier New', Courier, monospace;
+    }
+    form{
+        margin: 20px;
+       padding: 25px;
+        width: 400px;
+        border-radius: 10px;
+        border: solid 2px black;
+        margin-top: 80px;
+        margin-left: 550px;
+    }
+    form input{
+        color: rgb(34, 32, 32);
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+    label{
+        color: rgb(19, 18, 18);
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+   .to select{
+        padding-top: 10px;
+    }
+    .from select{
+        padding-top: 10px;
+        margin-top: 10px;
+    }
+    .from select option{
+        color:black;
+        background-color: transparent;
+        font-size: 16px;
+        text-align: center;
+        background-color: rgb(255, 251, 247);
+        cursor:pointer ;
+    }
+    .to select option{
+        color:black;
+        background-color: transparent;
+        font-size: 16px;
+        text-align: center;
+        cursor:pointer ;
+        background-color: rgb(255, 251, 247);
+    }
+    #num{
+        margin-top: 50px;
+        width: 90%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border:3px solid black;
+       background-color: rgb(255, 251, 247);
+        color: black;
+        cursor: text;
+        font-size: 16px;
+        text-align: center;
+        border-radius: 4px;
+        opacity: 0.8;
+        transition: all;
+       
+    }
+    #num:hover{
+        box-shadow: 0px 0px 10px black;
+    }
+    select{
+        color:rgb(8, 8, 8);
+        cursor: pointer;
+        font-size: bold;    
+    }
+    button{
+        width: 312px;
+        height: 50px;
+        background-color: #07f3a4;
+        color:black;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 5px;
+        margin-top: 20px;
+    }
+    input{
+        margin-top: 40px;
+    }
+    
+
+    .result {
+    text-align: center;
+    padding: 15px;
+    margin: 20px auto;
+    max-width: 400px;
+    background-color: #e3f2fd;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    color: #333;
+    margin-top: 25px;
+}
+
+
+</style>
+<body>
+    <nav>
+       <H2>Corrency Calculator</H2>
+    </nav>
+    
+    <form action="" method="post">
+        {% csrf_token %}
+        <label for="from_currency">From:</label>
+       <div class="from">
+        <select name="from_currency" id="from_currency">
+            {% for code, name in currencies %}
+            <option value="{{ code }}">{{ name }} ({{ code }})</option>
+            {% endfor %}
+        </select>
+       </div>
+        <label for="to_currency">To:</label>
+       <div class="to">
+        <select name="to_currency" id="to_currency">
+            {% for code, name in currencies %}
+            <option 
+            value="{{ code }}">{{ name }} ({{ code }})</option>
+            {% endfor %}
+        </select>
+       </div>
+        <input type="text" id="num"name="amount" placeholder="Enter amount to convert" required>
+        <button type="submit">Convert</button>
+        <div class="result">
+            {% if result %}
+                <h2>Conversion Result: <span>{{ result }}</span></h2>
+            {% endif %}
+        </div>
+        
+    </form>
+    
+    
+</body>
+</html>
